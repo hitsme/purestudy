@@ -119,3 +119,39 @@ print counter._JustCounter__secretCount
 #_foo 以单下划线开头表示protected类型变量或者函数 只能子类及自身访问
 #__foo 双下划线表示私有类型private的变量 只能类的内部使用
 
+#正则表达式 re.match(pattern,string,flags=0)
+
+import re
+print re.match('www','www.22kb.club').span()
+print re.match('club','www.22kb.club')
+
+line='Cats are smarter than dogs'
+matchObj=re.match(r'(.*) are (.*?) .*',line,re.M|re.I)
+print matchObj.span()
+if matchObj:
+    print matchObj.group()
+    print matchObj.group(1)
+    print matchObj.group(2)
+
+#re.search(pattern,string,flags=0)
+
+print re.search('www','www.22kb.club').span()
+print re.search('club','www.22kb.club').span()
+print re.search('c(.*)b','www.22kb.club').group()
+
+#检索和替换 python re.sub用于替换字符串的匹配项
+phone='2004-345-345'
+num=re.sub(r'#.*$','',phone)
+print num
+print re.sub(r'\D','',phone)
+def double(matched):
+    value=int(matched.group('value'))
+    return str(value*2)
+s='A2434Hd23'
+#print re.sub('(?P<value>\d)',double)
+print re.sub('(?P<value>\d+)',double,s)
+
+#re.compile函数 用于编译正则表达式，生成一个正则表达式对象，供match()和search()两个函数使用 re.compile(pattern,flags)
+#flags 可选，表示匹配模式，比如忽略大小写，多行模式等
+#1.re.I忽略大小写 2.re.L表示特殊字符集\w,\W，\b，\B,\s,\S依赖当前环境
+#3.re.M多行模式 4.re.S即为.并且
